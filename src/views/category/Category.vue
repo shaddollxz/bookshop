@@ -1,10 +1,13 @@
 <template>
-    <div>分类</div>
+    <head-nav>
+        <template #default>分类</template>
+    </head-nav>
 </template>
 
 <script setup>
 const props = defineProps({});
 const emit = defineEmits([]);
+import HeadNav from "components/common/HeadNav";
 
 defineExpose({});
 </script>

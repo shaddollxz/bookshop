@@ -5,12 +5,18 @@ function importAll(r) {
     r.keys().forEach((item) => {
         routes.push(r(item).default);
     });
+    return routes;
 }
 const routes = importAll(require.context("./", true, /\.router\.js/));
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+    next();
+    document.title = to.meta.title;
 });
 
 export default router;

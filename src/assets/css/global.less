@@ -1,0 +1,54 @@
+@import url("./normalize.css");
+
+html {
+    @media screen and (min-width: 320px) {
+        font-size: 14px;
+    }
+    @media screen and (min-width: 360px) {
+        font-size: 16px;
+    }
+    @media screen and (min-width: 400px) {
+        font-size: 18px;
+    }
+}
+
+:root {
+    --color-text: #666;
+    --color-high-text: #42bbaa;
+    --color-tint: #42b983;
+    --color-background: #ffffff;
+    --font-size-small: 0.5rem;
+    --font-size-normal: 1rem;
+    --font-size-big: 1.5rem;
+    --font-size-larg: 2.5rem;
+    --line-height: 1.5;
+}
+
+body {
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+a {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+#setSelfCenter {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -1,10 +1,13 @@
 <template>
-    <div>购物车</div>
+    <head-nav>
+        <template #default>购物车</template>
+    </head-nav>
 </template>
 
 <script setup>
 const props = defineProps({});
 const emit = defineEmits([]);
+import HeadNav from "components/common/HeadNav";
 
 defineExpose({});
 </script>
