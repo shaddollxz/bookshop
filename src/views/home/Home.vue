@@ -6,7 +6,7 @@
     <div class="wrapper" ref="wrapper">
         <div class="content">
             <div ref="headRollAndRecommend">
-                <div class="headRoll"></div>
+                <swiper :Urls="urls"></swiper>
                 <recommend :renderData="recommendData"></recommend>
             </div>
             <tab-card v-show="!beFixed" @tabClick="tabClick" :tabs="tabs_cn"></tab-card>
@@ -21,14 +21,21 @@
 // *===================↓↓↓↓↓↓===================* //
 const props = defineProps({});
 const emit = defineEmits([]);
+import Swiper from "./components/Swiper";
 import BackToTop from "components/common/BackToTop";
 import HeadNav from "components/common/HeadNav";
 import Recommend from "./components/Recommend";
 import TabCard from "components/content/TabCard";
 import GoodsList from "components/content/goods/GoodsList";
+
 import { getHomeAllData, getHomeGoods } from "network/home";
 import { computed, nextTick, onMounted, reactive, ref, watchEffect } from "@vue/runtime-core";
 import BetterScroll from "better-scroll";
+// *===================↑↑↑↑↑↑===================* //
+
+// todo请求轮播图地址
+// *===================↓↓↓↓↓↓===================* //
+const urls = reactive([]);
 // *===================↑↑↑↑↑↑===================* //
 
 // todo对推荐列表进行网络请求
@@ -37,6 +44,7 @@ const recommendData = ref(null);
 onMounted(() => {
     getHomeAllData().then(({ data }) => {
         recommendData.value = data.goods.data;
+        urls.push(...data.slides);
     });
 });
 // *===================↑↑↑↑↑↑===================* //
