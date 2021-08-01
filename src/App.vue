@@ -31,13 +31,12 @@
     </nav>
 </template>
 
-<script setup></script>
-
 <style lang="less">
 @import url("~css/global.less");
 @import url("~css/iconfont.css");
 
 nav {
+    height: var(--height-foot);
     position: fixed;
     bottom: 0;
     left: 0;
@@ -46,6 +45,7 @@ nav {
     background-color: #f6f6f6;
     box-shadow: 0 -5px 1px rgba(100, 100, 100, 0.2);
     ul {
+        padding: 10px 0;
         display: flex;
         justify-content: space-evenly;
         li > a {
@@ -58,7 +58,6 @@ nav {
                 color: var(--color-tint);
             }
             div {
-                margin-top: 5px;
                 color: inherit;
             }
         }

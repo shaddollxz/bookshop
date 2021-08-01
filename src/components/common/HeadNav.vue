@@ -12,6 +12,7 @@
             <slot name="right"></slot>
         </div>
     </div>
+    <div class="Placeholder"></div>
 </template>
 
 <script setup>
@@ -34,7 +35,7 @@ defineExpose({});
 
 <style lang="less" scoped>
 .headNav {
-    height: 45px;
+    height: var(--height-head);
     position: fixed;
     left: 0;
     right: 0;
@@ -46,6 +47,7 @@ defineExpose({});
     align-items: center;
     text-align: center;
     font-size: var(--font-size-normal);
+    z-index: 999;
     .left,
     .right {
         margin: 20px;
@@ -53,5 +55,8 @@ defineExpose({});
     .center {
         flex: 1;
     }
+}
+.Placeholder {
+    height: .headNav[height];
 }
 </style>

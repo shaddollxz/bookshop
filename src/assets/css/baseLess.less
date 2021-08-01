@@ -2,5 +2,26 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate((-50%, -50%));
+    transform: translate(-50%, -50%);
+}
+
+#clearFloat {
+    :after {
+        content: "";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}
+
+#limitTextLength {
+    text-overflow: ellipsis; /*超出部分省略*/
+    white-space: nowrap; /*强制不换行*/
+    overflow: hidden; /*超出部分隐藏*/
+}
+
+#clearMarPan {
+    margin: 0;
+    padding: 0;
 }

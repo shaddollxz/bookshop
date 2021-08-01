@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1627728300823') format('truetype');
+  src: url('iconfont.ttf?t=1627799513787') format('truetype');
 }
 
 .iconfont {
@@ -23,6 +23,10 @@
   content: "\e66d";
 }
 
+.icon-jiage:before {
+  content: "\e652";
+}
+
 .icon-gerenzhongxin:before {
   content: "\e606";
 }
@@ -33,5 +37,13 @@
 
 .icon-zuo:before {
   content: "\e694";
+}
+
+.icon-shoucang:before {
+  content: "\e629";
+}
+
+.icon-shoucang1:before {
+  content: "\e62a";
 }
 

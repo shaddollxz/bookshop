@@ -27,6 +27,13 @@
       "unicode_decimal": 58989
     },
     {
+      "icon_id": "809208",
+      "name": "价格",
+      "font_class": "jiage",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
       "icon_id": "3640174",
       "name": "个人中心",
       "font_class": "gerenzhongxin",
@@ -46,6 +53,20 @@
       "font_class": "zuo",
       "unicode": "e694",
       "unicode_decimal": 59028
+    },
+    {
+      "icon_id": "19954256",
+      "name": "收 藏",
+      "font_class": "shoucang",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "19954259",
+      "name": "收 藏 (1)",
+      "font_class": "shoucang1",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
     }
   ]
 }
