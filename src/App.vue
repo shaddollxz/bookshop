@@ -21,7 +21,9 @@
             </li>
             <li>
                 <router-link to="/shopcar">
-                    <i class="iconfont icon-gouwuchekong"></i>
+                    <van-badge :content="10" max="9">
+                        <i class="iconfont icon-gouwuchekong"></i>
+                    </van-badge>
                     <div>购物车</div>
                 </router-link>
             </li>

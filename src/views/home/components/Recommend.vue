@@ -2,7 +2,7 @@
     <div class="recommend">
         <div class="recommend-item" v-for="item of renderData" :key="item.id">
             <a @click.prevent="goDetali(item.id)">
-                <img :src="item.cover_url" :alt="item.title" :title="item.description" />
+                <img v-lazy="item.cover_url" :alt="item.title" :title="item.description" />
                 <p>{{ item.title }}</p>
             </a>
         </div>

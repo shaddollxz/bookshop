@@ -33,14 +33,10 @@ import { computed, nextTick, onMounted, reactive, ref, watchEffect } from "@vue/
 import BetterScroll from "better-scroll";
 // *===================↑↑↑↑↑↑===================* //
 
-// todo请求轮播图地址
-// *===================↓↓↓↓↓↓===================* //
-const urls = reactive([]);
-// *===================↑↑↑↑↑↑===================* //
-
-// todo对推荐列表进行网络请求
+// todo对推荐列表和轮播图进行网络请求
 // *===================↓↓↓↓↓↓===================* //
 const recommendData = ref(null);
+const urls = reactive([]);
 onMounted(() => {
     getHomeAllData().then(({ data }) => {
         recommendData.value = data.goods.data;
