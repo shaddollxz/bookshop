@@ -1,13 +1,14 @@
 <template>
     <div class="goodsList">
-        <template v-for="item in $props.goodsData" :key="item.id">
+        <!-- 后台返回有重复数据，这里只能不设置key -->
+        <template v-for="item in $props.goodsData">
             <goods :data="item"></goods>
         </template>
     </div>
 </template>
 
 <script setup>
-import { watch } from "@vue/runtime-core";
+import { ref, watch } from "@vue/runtime-core";
 import Goods from "./Goods";
 const props = defineProps({
     goodsData: {

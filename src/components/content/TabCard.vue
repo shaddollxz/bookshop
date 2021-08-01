@@ -41,7 +41,6 @@ defineExpose({});
 <style lang="less" scoped>
 @import url("~css/baseLess.less");
 .tabCard {
-    position: relative;
     position: sticky;
     top: 0;
     &-head {
