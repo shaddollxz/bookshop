@@ -15,6 +15,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+    if (to.meta.needLogin && !window.localStorage.getItem("access_token")) {
+        next("/login");
+    }
     next();
     document.title = to.meta.title;
 });

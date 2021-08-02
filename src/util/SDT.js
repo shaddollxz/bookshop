@@ -1,7 +1,7 @@
 /*
  * @Author: shaddollxz
  * @Date: 2021-06-30 12:38:16
- * @LastEditTime: 2021-07-24 17:25:32
+ * @LastEditTime: 2021-08-02 20:30:03
  * @Description: 我的JS工具库，含有一些常用函数和扩展类
  */
 
@@ -15,7 +15,7 @@
 function debounce(callback, delay = 300, style = true) {
     let timeoutId = null;
     if (style) {
-        return function (...events) {
+        return function(...events) {
             if (!timeoutId) {
                 callback.apply(this, events);
             } else {
@@ -26,7 +26,7 @@ function debounce(callback, delay = 300, style = true) {
             }, delay);
         };
     } else {
-        return function (...events) {
+        return function(...events) {
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => {
                 callback.apply(this, events);
@@ -47,7 +47,7 @@ function debounce(callback, delay = 300, style = true) {
 function throttle(callback, delay = 500, style = true) {
     let timeoutId = null;
     if (style) {
-        return function (...events) {
+        return function(...events) {
             if (!timeoutId) {
                 callback.apply(this, events);
                 timeoutId = setTimeout(() => {
@@ -56,7 +56,7 @@ function throttle(callback, delay = 500, style = true) {
             }
         };
     } else {
-        return function (...events) {
+        return function(...events) {
             if (!timeoutId) {
                 timeoutId = setTimeout(() => {
                     timeoutId = null;
@@ -302,8 +302,7 @@ function replaceObject(ov, ...nv) {
  */
 function userBrowers() {
     const agent = navigator.userAgent;
-    const regexp =
-        /((?<opera>OPR)|(?<safari>Safari)|(?<chrome>Chrome)|(?<edge>Edg)|(?<ie>NET)|(?<firefox>Firefox))\/(?<version>(\d|\.)*)/g;
+    const regexp = /((?<opera>OPR)|(?<safari>Safari)|(?<chrome>Chrome)|(?<edge>Edg)|(?<ie>NET)|(?<firefox>Firefox))\/(?<version>(\d|\.)*)/g;
     const result = {};
     const matchAll = agent.matchAll(regexp);
     for (const { groups } of matchAll) {
@@ -371,7 +370,7 @@ function rollTo(y = 0, x = 0) {
  * 通过继承该类并在super中写入构造函数
  * 该类就会成为单例模式，只生成一个实例
  */
-const SingletonConstructor = (function () {
+const SingletonConstructor = (function() {
     const instances = Object.create(null);
     return class {
         constructor(Constructor) {
@@ -414,7 +413,7 @@ class AsyncConstructor {
 /** SDMath的基础 借鉴了MDN里的示例方法 */
 function mathBase(methods) {
     const method = Math[methods];
-    return function (number, precision = 0) {
+    return function(number, precision = 0) {
         if (precision) {
             number = number + "e" + precision;
             return +(method(+number) + "e" + -precision);
@@ -552,7 +551,7 @@ class Random {
             number: [48, 57],
             chinese: [0x4e00, 0x9fa5],
         };
-        return function (len = 1, type = "all") {
+        return function(len = 1, type = "all") {
             if (len == 1) {
                 return String.fromCharCode(Random.getNumber(charMap[type]));
             } else {
@@ -608,8 +607,7 @@ class SDDate extends Date {
                     : "a.m."
             );
         }
-        const regexp =
-            /(?<FullYear>Y{4})|(?<month>M{2,3})|(?<Date>D{2})|(?<Hours>(h|H){2})|(?<Minutes>m{2})|(?<Seconds>s{2})|(?<Day>W{1})|(?<Milliseconds>ms)/g;
+        const regexp = /(?<FullYear>Y{4})|(?<month>M{2,3})|(?<Date>D{2})|(?<Hours>(h|H){2})|(?<Minutes>m{2})|(?<Seconds>s{2})|(?<Day>W{1})|(?<Milliseconds>ms)/g;
         if (regexp.test(formatStr) || isHaveTT) {
             const isHour12 = /hh/g.test(formatStr);
             return formatStr.replace(regexp, (...arg) => {
@@ -749,8 +747,7 @@ class SDDate extends Date {
      * @param {string} formatStr 格式化字符串 只能包含timeObj指定的属性
      */
     static formatTimeObj(timeObj, formatStr) {
-        const regexp =
-            /(?<Year>Y{4})|(?<Month>M{2})|(?<Day>D{2})|(?<Hour>h{2})|(?<Minute>m{2})|(?<Second>s{2})|(?<Millisecond>ms)/g;
+        const regexp = /(?<Year>Y{4})|(?<Month>M{2})|(?<Day>D{2})|(?<Hour>h{2})|(?<Minute>m{2})|(?<Second>s{2})|(?<Millisecond>ms)/g;
         if (regexp.test(formatStr)) {
             return formatStr.replace(regexp, (...arg) => {
                 const groups = arg.pop();
@@ -826,7 +823,7 @@ SDDate.prototype.transformEnglish_Month = {
  */
 class LocalStorage extends SingletonConstructor {
     constructor() {
-        super(function () {
+        super(function() {
             //? 检测localStorage是否可用
             try {
                 var x = "__storage_test__";
@@ -859,7 +856,7 @@ class LocalStorage extends SingletonConstructor {
             return result;
         }
     }
-    remove(key) {
+    removeItem(key) {
         try {
             this.localStorage.removeItem(key);
             return true;
@@ -906,7 +903,7 @@ class LocalStorage extends SingletonConstructor {
  * 实例化时使用`await new SDIDB(xxx)`
  * 实例化时自动打开或创建当前版本的数据库
  */
-const SDIDB = (function () {
+const SDIDB = (function() {
     return class extends AsyncConstructor {
         constructor(dbname) {
             if (!window.hasOwnProperty("indexedDB")) throw "该浏览器不支持indexedDB";
@@ -999,8 +996,9 @@ const SDIDB = (function () {
                 if (indexNames.length) {
                     const indexObj = {};
                     for (const indexName of indexNames) {
-                        const { keyPath, multiEntry, unique, name } =
-                            IDBObjectStore.index(indexName);
+                        const { keyPath, multiEntry, unique, name } = IDBObjectStore.index(
+                            indexName
+                        );
                         indexObj[name] = { keyPath, multiEntry, unique };
                     }
                     this.indexs = indexObj;
@@ -1260,7 +1258,7 @@ const SDIDB = (function () {
 
                 if (type == "create") {
                     //? 建表
-                    (function (tableName, settings = {}) {
+                    (function(tableName, settings = {}) {
                         const table = DB.createObjectStore(
                             tableName,
                             "keyPath" in settings

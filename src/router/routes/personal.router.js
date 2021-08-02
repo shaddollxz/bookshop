@@ -4,5 +4,6 @@ export default {
     component: () => import("views/personal/Personal"),
     meta: {
         title: "个人信息",
+        needLogin: true,
     },
 };
