@@ -16,6 +16,8 @@ import {
     Tab,
     Tabs,
     Card,
+    Tag,
+    Image as VanImage,
 } from "vant";
 
 createApp(App)
@@ -30,6 +32,8 @@ createApp(App)
     .use(Tab)
     .use(Tabs)
     .use(Card)
+    .use(VanImage)
+    .use(Tag)
     .use(Lazyload, {
         loading: "img/logo.png",
     })

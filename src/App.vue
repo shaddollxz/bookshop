@@ -1,10 +1,10 @@
 <template>
     <router-view v-slot="{ Component }">
-        <keep-alive>
+        <keep-alive exclude="detali">
             <component :is="Component" />
         </keep-alive>
     </router-view>
-
+    <div id="Placeholder"></div>
     <nav>
         <ul>
             <li>
@@ -41,6 +41,10 @@
 @import url("~css/global.less");
 @import url("~css/iconfont.css");
 
+#Placeholder {
+    width: 100%;
+    height: var(--height-foot);
+}
 nav {
     height: var(--height-foot);
     position: fixed;

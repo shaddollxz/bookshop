@@ -1,6 +1,8 @@
 <template>
-    <div class="goods" :title="data.description">
-        <img v-lazy="data.cover_url" :alt="data.description" />
+    <div class="goods">
+        <a @click.prevent="goDetali(data.id)">
+            <img v-lazy="data.cover_url" :alt="data.description" />
+        </a>
         <div class="goods-info">
             <p>{{ data.title }}</p>
             <div class="goods-info-msg">
@@ -22,6 +24,9 @@
 
 <script setup>
 import { ref, toRef } from "@vue/reactivity";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const route = useRoute();
 
 const props = defineProps({
     data: {
@@ -33,6 +38,9 @@ const emit = defineEmits([]);
 
 const data = toRef(props, "data");
 let isColloect = ref(false);
+function goDetali(id) {
+    router.push({ path: "/detali", query: { id } });
+}
 
 defineExpose({});
 </script>

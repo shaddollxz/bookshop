@@ -38,6 +38,7 @@
                         :key="index"
                     >
                         <van-card
+                            @click="goDetali(item.id)"
                             :num="2"
                             :price="item.price"
                             :desc="'已售出：' + item.sales"
@@ -58,6 +59,8 @@ import { reactive, ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import BetterScroll from "better-scroll";
 import { throttle } from "../../util/SDT";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
 
 // todo通过状态模式集成获得数据的方法
 // *===================↓↓↓↓↓↓===================* //
@@ -155,6 +158,13 @@ onMounted(() => {
         }, 200)
     );
 });
+// *===================↑↑↑↑↑↑===================* //
+
+// todo跳转到商品详情页
+// *===================↓↓↓↓↓↓===================* //
+function goDetali(id) {
+    router.push({ path: "/detali", query: { id } });
+}
 // *===================↑↑↑↑↑↑===================* //
 defineExpose({});
 </script>
