@@ -3,13 +3,33 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import { Button, Swipe, SwipeItem, Lazyload, Badge } from "vant";
+import {
+    Button,
+    Swipe,
+    SwipeItem,
+    Lazyload,
+    Badge,
+    Sidebar,
+    SidebarItem,
+    Collapse,
+    CollapseItem,
+    Tab,
+    Tabs,
+    Card,
+} from "vant";
 
 createApp(App)
     .use(Button)
     .use(Swipe)
     .use(SwipeItem)
     .use(Badge)
+    .use(Sidebar)
+    .use(SidebarItem)
+    .use(Collapse)
+    .use(CollapseItem)
+    .use(Tab)
+    .use(Tabs)
+    .use(Card)
     .use(Lazyload, {
         loading: "img/logo.png",
     })
