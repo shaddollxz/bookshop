@@ -1,7 +1,7 @@
 /*
  * @Author: shaddollxz
  * @Date: 2021-06-30 12:38:16
- * @LastEditTime: 2021-08-02 20:30:03
+ * @LastEditTime: 2021-08-03 23:11:16
  * @Description: 我的JS工具库，含有一些常用函数和扩展类
  */
 
@@ -1026,6 +1026,7 @@ const SDIDB = (function() {
                 await this.createTable(tableName, settings);
                 await this.useTable(tableName);
             }
+            return this;
         }
 
         /**

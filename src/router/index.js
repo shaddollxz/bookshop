@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { SDIDB } from "@/util/SDT";
 
 function importAll(r) {
     const routes = [];
@@ -14,7 +15,7 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     if (to.meta.needLogin && !window.localStorage.getItem("access_token")) {
         next("/login");
     }

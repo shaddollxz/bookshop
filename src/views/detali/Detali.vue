@@ -1,7 +1,7 @@
 <template>
     <div class="detali">
         <head-nav>
-            <template #default>商品详情 {{ id }}</template>
+            <template #default>商品详情</template>
         </head-nav>
 
         <van-image width="100" height="100" lazy-load :src="goodMsg.detali.cover_url" />
@@ -18,7 +18,7 @@
                 <van-tag plain type="danger">标签</van-tag>
             </template>
             <template #footer>
-                <van-button size="small" type="info">加入购物车</van-button>
+                <van-button size="small" type="info" @click="addToCar">加入购物车</van-button>
                 <van-button size="small" type="danger">直接购买</van-button>
             </template>
         </van-card>
@@ -50,15 +50,20 @@ export default {
 const props = defineProps({});
 const emit = defineEmits([]);
 import { reactive, ref, toRef } from "@vue/reactivity";
-import { onMounted } from "@vue/runtime-core";
+import { nextTick, onMounted } from "@vue/runtime-core";
+import { useStore } from "vuex";
+const store = useStore();
 import HeadNav from "components/common/HeadNav";
 import { useRouter, useRoute } from "vue-router";
 const route = useRoute();
 import { getGoodsMsg } from "network/detali";
 import GoodsList from "components/content/goods/GoodsList";
+import { addCar } from "network/shopcar";
+import { Toast } from "vant";
 
 // todo获得商品的详情
 // *===================↓↓↓↓↓↓===================* //
+const tagActive = ref(0);
 const id = route.query.id;
 const goodMsg = reactive({
     detali: {},
@@ -68,14 +73,27 @@ onMounted(() => {
     getGoodsMsg(id).then(({ data }) => {
         goodMsg.detali = data.goods;
         goodMsg.like = data.like_goods;
-        console.log(goodMsg.detali.comments);
     });
 });
 // *===================↑↑↑↑↑↑===================* //
 
-// todo
+// todo购物车操作
 // *===================↓↓↓↓↓↓===================* //
-const tagActive = ref(0);
+function addToCar() {
+    addCar({ goods_id: goodMsg.detali.id })
+        .then(async (res) => {
+            if (res.status < 400) {
+                Toast("商品已加入购物车");
+            }
+        })
+        .catch((err) => {
+            Toast.fail(err);
+        });
+}
+
+function goOrderPage() {
+    // router.push("/order");
+}
 // *===================↑↑↑↑↑↑===================* //
 </script>
 

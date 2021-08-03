@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store";
 
 import {
+    Checkbox,
+    CheckboxGroup,
     Button,
     Swipe,
     SwipeItem,
@@ -20,7 +22,10 @@ import {
     Form,
     Field,
     Image as VanImage,
+    Stepper,
+    SwipeCell,
 } from "vant";
+import { checkerProps } from "vant/lib/checkbox/Checker";
 
 createApp(App)
     .use(Button)
@@ -38,6 +43,10 @@ createApp(App)
     .use(Form)
     .use(Tag)
     .use(Field)
+    .use(Checkbox)
+    .use(CheckboxGroup)
+    .use(Stepper)
+    .use(SwipeCell)
     .use(Lazyload, {
         loading: "img/logo.png",
     })

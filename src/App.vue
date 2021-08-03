@@ -1,6 +1,6 @@
 <template>
     <router-view v-slot="{ Component }">
-        <keep-alive exclude="detali">
+        <keep-alive exclude="detali,shopcar">
             <component :is="Component" />
         </keep-alive>
     </router-view>
@@ -21,9 +21,7 @@
             </li>
             <li>
                 <router-link to="/shopcar">
-                    <van-badge :content="10" max="9">
-                        <i class="iconfont icon-gouwuchekong"></i>
-                    </van-badge>
+                    <i class="iconfont icon-gouwuchekong"></i>
                     <div>购物车</div>
                 </router-link>
             </li>

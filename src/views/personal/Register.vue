@@ -85,14 +85,19 @@ import { Toast } from "vant";
 const userInfo = reactive({ name: "", email: "", password: "", password_confirmation: "" });
 
 function onSubmit() {
-    register(userInfo).then((res) => {
-        if (res.status == 201) {
-            Toast("注册成功");
-            setTimeout(() => {
-                router.push("/login");
-            }, 1500);
+    register(userInfo).then(
+        (res) => {
+            if (res.status == 201) {
+                Toast("注册成功");
+                setTimeout(() => {
+                    router.push("/login");
+                }, 1500);
+            }
+        },
+        (err) => {
+            Toast(err);
         }
-    });
+    );
 }
 // *===================↑↑↑↑↑↑===================* //
 
