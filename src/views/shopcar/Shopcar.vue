@@ -25,7 +25,7 @@
                     <small>￥</small>
                     {{ allPrice }}
                 </span>
-                <van-button type="warning">结算</van-button>
+                <van-button type="warning" @click="previewOrder">结算</van-button>
             </div>
         </div>
 
@@ -51,6 +51,8 @@ import { debounce } from "@/util/SDT";
 import { Toast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
+import { useStore } from "vuex";
+const store = useStore();
 
 // todo获得购物车信息
 // *===================↓↓↓↓↓↓===================* //
@@ -76,10 +78,8 @@ function choseAll() {
 }
 
 let allPrice = computed(() => {
-    console.log(shopcarsData, chosed.value);
     return shopcarsData.reduce((result, current) => {
         if (chosed.value.includes(current.id)) {
-            console.log(result + current.num * current.goods.price);
             return result + current.num * current.goods.price;
         } else {
             return 0;
@@ -95,12 +95,10 @@ function removeCar(id) {
         if (res.status < 400) {
             for (let i = 0; i < shopcarsData.length; i++) {
                 if (shopcarsData[i].id == id) {
-                    console.log("find");
                     shopcarsData.splice(i, 1);
                 }
             }
             Toast("移除成功");
-            console.log(shopcarsData);
         }
     });
 }
@@ -116,8 +114,9 @@ watch(
     }, 1500)
 );
 // *===================↑↑↑↑↑↑===================* //
-function toOrder() {
-    router.push("/order");
+function previewOrder() {
+    store.commit("addToShopCar", chosed.value);
+    router.push("/preview");
 }
 
 defineExpose({});

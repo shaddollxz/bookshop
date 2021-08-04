@@ -14,7 +14,7 @@
             </div>
             <div class="main-btns">
                 <van-cell title="我的收藏" is-link />
-                <van-cell title="我的订单" is-link />
+                <van-cell title="我的订单" is-link @click="jumpTo('order')" />
                 <van-cell title="账号管理" is-link />
                 <van-cell title="地址管理" is-link @click="jumpTo('address')" />
                 <van-cell title="关于我们" is-link @click="Toast('制作:shaddollxz')" />

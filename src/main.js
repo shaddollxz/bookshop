@@ -30,6 +30,7 @@ import {
     Cascader,
     AddressEdit,
     AddressList,
+    SubmitBar,
 } from "vant";
 import { checkerProps } from "vant/lib/checkbox/Checker";
 
@@ -59,6 +60,7 @@ createApp(App)
     .use(Cascader)
     .use(AddressEdit)
     .use(AddressList)
+    .use(SubmitBar)
     .use(Lazyload, {
         loading: "img/logo.png",
     })

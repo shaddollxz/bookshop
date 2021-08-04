@@ -19,7 +19,7 @@
             </template>
             <template #footer>
                 <van-button size="small" type="info" @click="addToCar">加入购物车</van-button>
-                <van-button size="small" type="danger">直接购买</van-button>
+                <van-button size="small" type="danger" @click="goOrderPage">直接购买</van-button>
             </template>
         </van-card>
 
@@ -55,6 +55,7 @@ import { useStore } from "vuex";
 const store = useStore();
 import HeadNav from "components/common/HeadNav";
 import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
 const route = useRoute();
 import { getGoodsMsg } from "network/detali";
 import GoodsList from "components/content/goods/GoodsList";
@@ -80,19 +81,25 @@ onMounted(() => {
 // todo购物车操作
 // *===================↓↓↓↓↓↓===================* //
 function addToCar() {
-    addCar({ goods_id: goodMsg.detali.id })
-        .then(async (res) => {
-            if (res.status < 400) {
-                Toast("商品已加入购物车");
-            }
-        })
-        .catch((err) => {
-            Toast.fail(err);
-        });
+    return new Promise((resolve, reject) => {
+        addCar({ goods_id: goodMsg.detali.id })
+            .then(async (res) => {
+                if (res.status < 400) {
+                    Toast("商品已加入购物车");
+                    resolve();
+                }
+            })
+            .catch((err) => {
+                Toast.fail(err);
+                reject();
+            });
+    });
 }
 
 function goOrderPage() {
-    // router.push("/order");
+    addToCar().then(() => {
+        router.push("/preview");
+    });
 }
 // *===================↑↑↑↑↑↑===================* //
 </script>
