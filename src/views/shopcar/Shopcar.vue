@@ -42,10 +42,10 @@ export default {
 <script setup>
 const props = defineProps({});
 const emit = defineEmits([]);
-import { computed, nextTick, onMounted, onUpdated, reactive, ref, watch } from "@vue/runtime-core";
+import { computed, onMounted, reactive, ref, watch } from "@vue/runtime-core";
 import HeadNav from "components/common/HeadNav";
-import GoodCar from "./GoodCar";
-import WhenNothing from "./WhenNothing.vue";
+import GoodCar from "./components/GoodCar";
+import WhenNothing from "./components/WhenNothing";
 import { carList, deleteCar, changeCarChose } from "network/shopcar";
 import { debounce } from "@/util/SDT";
 import { Toast } from "vant";

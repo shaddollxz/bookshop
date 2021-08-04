@@ -24,6 +24,8 @@ import {
     Image as VanImage,
     Stepper,
     SwipeCell,
+    Cell,
+    CellGroup,
 } from "vant";
 import { checkerProps } from "vant/lib/checkbox/Checker";
 
@@ -47,6 +49,8 @@ createApp(App)
     .use(CheckboxGroup)
     .use(Stepper)
     .use(SwipeCell)
+    .use(Cell)
+    .use(CellGroup)
     .use(Lazyload, {
         loading: "img/logo.png",
     })

@@ -26,4 +26,11 @@ function logout() {
     return request({ url: "/api/auth/logout", method: "post" });
 }
 
-export { register, login, logout };
+function getUserMsg() {
+    return request({
+        url: "/api/user",
+        method: "get",
+    });
+}
+
+export { register, login, logout, getUserMsg };
