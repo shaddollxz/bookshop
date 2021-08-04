@@ -26,6 +26,10 @@ import {
     SwipeCell,
     Cell,
     CellGroup,
+    Popup,
+    Cascader,
+    AddressEdit,
+    AddressList,
 } from "vant";
 import { checkerProps } from "vant/lib/checkbox/Checker";
 
@@ -51,6 +55,10 @@ createApp(App)
     .use(SwipeCell)
     .use(Cell)
     .use(CellGroup)
+    .use(Popup)
+    .use(Cascader)
+    .use(AddressEdit)
+    .use(AddressList)
     .use(Lazyload, {
         loading: "img/logo.png",
     })

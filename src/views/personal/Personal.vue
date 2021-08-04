@@ -16,7 +16,7 @@
                 <van-cell title="我的收藏" is-link />
                 <van-cell title="我的订单" is-link />
                 <van-cell title="账号管理" is-link />
-                <van-cell title="地址管理" is-link />
+                <van-cell title="地址管理" is-link @click="jumpTo('address')" />
                 <van-cell title="关于我们" is-link @click="Toast('制作:shaddollxz')" />
             </div>
             <van-button type="danger" @click="logOut">退出登录</van-button>
@@ -43,6 +43,13 @@ onMounted(() => {
         Object.assign(user, data);
     });
 });
+// *===================↑↑↑↑↑↑===================* //
+
+// todo页面跳转
+// *===================↓↓↓↓↓↓===================* //
+function jumpTo(page, query) {
+    router.push({ path: `/${page}`, query: query || {} });
+}
 // *===================↑↑↑↑↑↑===================* //
 
 // todo注销登录
