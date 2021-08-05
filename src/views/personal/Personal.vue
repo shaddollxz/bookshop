@@ -13,11 +13,11 @@
                 </div>
             </div>
             <div class="main-btns">
-                <van-cell title="我的收藏" is-link />
+                <van-cell title="我的收藏" is-link @click="Toast.fail('404')" />
                 <van-cell title="我的订单" is-link @click="jumpTo('order')" />
-                <van-cell title="账号管理" is-link />
+                <van-cell title="账号管理" is-link @click="Toast.fail('404')" />
                 <van-cell title="地址管理" is-link @click="jumpTo('address')" />
-                <van-cell title="关于我们" is-link @click="Toast('制作:shaddollxz')" />
+                <van-cell title="关于我们" is-link @click="Toast.fail('制作:shaddollxz')" />
             </div>
             <van-button type="danger" @click="logOut">退出登录</van-button>
         </div>
@@ -56,9 +56,8 @@ function jumpTo(page, query) {
 // *===================↓↓↓↓↓↓===================* //
 function logOut() {
     logout().then((res) => {
-        console.log(res);
         if (res.status == 204) {
-            Toast("注销成功，一秒后返回主页");
+            Toast.success("注销成功，一秒后返回主页");
             window.localStorage.removeItem("access_token");
             setTimeout(() => {
                 router.push("/home");

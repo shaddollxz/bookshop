@@ -64,7 +64,7 @@ function onSubmit() {
         if (res.status == 200) {
             const data = res.data;
             window.localStorage.setItem("access_token", data.access_token);
-            Toast("登录成功,一秒后返回");
+            Toast.success("登录成功,一秒后返回");
             setTimeout(() => {
                 router.go(-1);
             }, 1000);
