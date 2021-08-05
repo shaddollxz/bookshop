@@ -1,7 +1,7 @@
 <template>
     <div class="goodsList">
         <!-- 后台返回有重复数据，这里只能不设置key -->
-        <template v-for="item in $props.goodsData">
+        <template v-for="item in $props.goodsData" :key="item">
             <goods :data="item"></goods>
         </template>
     </div>

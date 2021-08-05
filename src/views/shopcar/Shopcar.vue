@@ -82,7 +82,7 @@ let allPrice = computed(() => {
         if (chosed.value.includes(current.id)) {
             return result + current.num * current.goods.price;
         } else {
-            return 0;
+            return result;
         }
     }, 0);
 });
