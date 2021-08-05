@@ -1,7 +1,7 @@
 /*
  * @Author: shaddollxz
  * @Date: 2021-07-31 15:19:54
- * @LastEditTime: 2021-08-02 22:36:35
+ * @LastEditTime: 2021-08-05 18:21:22
  * @Description: 全局的axios请求封装
  */
 
@@ -31,6 +31,9 @@ export default function request(options) {
         (error) => {
             if (error) {
                 try {
+                    if (error.response?.status == 404) {
+                        return Promise.reject(404);
+                    }
                     if (error.response?.status == 401) {
                         return Promise.reject("登录后再尝试进行操作");
                     }

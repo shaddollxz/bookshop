@@ -31,11 +31,10 @@ function changeAddress(id, data) {
     });
 }
 
-function deleteAddress() {
+function deleteAddress(address) {
     return request({
-        url: "/api/address/",
+        url: "/api/address/" + address,
         method: "delete",
-        data: {},
     });
 }
 
@@ -46,4 +45,4 @@ function getAddressMsg(id) {
     });
 }
 
-export { getAddress, addAddress, getAddressMsg, changeAddress };
+export { getAddress, addAddress, getAddressMsg, changeAddress, deleteAddress };

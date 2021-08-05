@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <head-nav>
-            <template #default>收获地址</template>
+            <template #default>收货地址</template>
         </head-nav>
 
         <van-address-list
@@ -12,14 +12,28 @@
             @add="onAdd"
             @edit="onEdit"
         />
+
+        <div class="choseAddress" v-if="showChose">
+            <van-button @click="chose(choseAddressID)" type="danger">
+                选择地址
+            </van-button>
+        </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: "addressList",
+};
+</script>
 
 <script setup>
 import HeadNav from "components/common/HeadNav";
 import { reactive, ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { getAddress } from "network/adress";
+import { useStore } from "vuex";
+const store = useStore();
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
@@ -30,7 +44,11 @@ const emit = defineEmits([]);
 // *===================↓↓↓↓↓↓===================* //
 let choseAddressID = ref(0);
 const list = reactive([]);
+let showChose = ref(false);
 onMounted(() => {
+    if (route.query.func == "chose") {
+        showChose.value = true;
+    }
     getAddress().then(({ data }) => {
         list.push(
             ...data.data.map((value) => {
@@ -57,12 +75,27 @@ function onEdit(item) {
 }
 // *===================↑↑↑↑↑↑===================* //
 
+// todo选择地址
+// *===================↓↓↓↓↓↓===================* //
+function chose(id) {
+    store.commit("choseAddress", id);
+    router.go(-1);
+}
+// *===================↑↑↑↑↑↑===================* //
+
 defineExpose({});
 </script>
 
 <style lang="less" scoped>
 .choseAddress {
-    height: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
     width: 100%;
+    z-index: 999;
+    .van-button {
+        width: 100%;
+        border-radius: 25px;
+    }
 }
 </style>

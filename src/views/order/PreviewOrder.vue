@@ -6,7 +6,7 @@
 
         <div class="main">
             <div class="address">
-                <van-cell is-link>
+                <van-cell is-link @click="changeAddress">
                     <template #title>
                         <span>姓名：{{ address.name }}</span>
                         <span>联系电话：{{ address.phone }}</span>
@@ -32,6 +32,8 @@
             button-text="生成订单"
             @submit="onSubmit(address.id)"
         />
+
+        <pay v-model:show="showPay" :orderID="orderId" @changeShowPay="changeShowPay"></pay>
     </div>
 </template>
 
@@ -45,9 +47,12 @@ export default {
 import { computed, onMounted, reactive, ref } from "@vue/runtime-core";
 import HeadNav from "components/common/HeadNav";
 import GoodCard from "./components/GoodCard";
+import Pay from "./components/Pay";
 import { orderPreview, createOrder } from "network/order";
-import { carList as getCarList } from "network/shopcar";
+import { getAddressMsg } from "network/adress";
 import { Toast } from "vant";
+import { useStore } from "vuex";
+const store = useStore();
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const props = defineProps({});
@@ -64,15 +69,21 @@ let allPrice = computed(() => {
 });
 onMounted(() => {
     orderPreview().then(({ data }) => {
-        //? 地址
-        data.address.forEach((item) => {
-            if (item.is_default) {
-                address.value = item;
+        if (store.state.chosedAddressID) {
+            getAddressMsg(store.state.chosedAddressID).then(({ data }) => {
+                address.value = data;
+            });
+        } else {
+            //? 地址
+            data.address.forEach((item) => {
+                if (item.is_default) {
+                    address.value = item;
+                }
+            });
+            //? 没有默认地址用第一个
+            if (!address.value) {
+                address.value = data.address[0];
             }
-        });
-        //? 没有默认地址用第一个
-        if (!address.value) {
-            address.value = data.address[0];
         }
 
         //? 购买的商品
@@ -85,17 +96,29 @@ onMounted(() => {
 });
 // *===================↑↑↑↑↑↑===================* //
 
+// todo修改地址
+// *===================↓↓↓↓↓↓===================* //
+function changeAddress() {
+    router.push({ path: "/address", query: { func: "chose" } });
+}
+// *===================↑↑↑↑↑↑===================* //
+
 // todo提交生成
 // *===================↓↓↓↓↓↓===================* //
+let showPay = ref(false);
+let orderId = ref(0);
 function onSubmit(id) {
     createOrder(id).then((res) => {
         if (res.status == 200) {
             Toast("订单创建成功");
-            setTimeout(() => {
-                router.push("/order");
-            }, 1000);
+            showPay.value = true;
+            orderId.value = res.data.id;
+            console.log(orderId.value);
         }
     });
+}
+function changeShowPay(value) {
+    showPay.value = value;
 }
 // *===================↑↑↑↑↑↑===================* //
 
@@ -103,6 +126,7 @@ defineExpose({});
 </script>
 
 <style lang="less" scoped>
+@import url("~css/baseLess.less");
 .address {
     .van-cell {
         display: flex;

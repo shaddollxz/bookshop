@@ -30,7 +30,7 @@ const emit = defineEmits([]);
 import { reactive, ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
 import HeadNav from "components/common/HeadNav";
-import { getAddressMsg, addAddress, changeAddress } from "network/adress";
+import { getAddressMsg, addAddress, changeAddress, deleteAddress } from "network/adress";
 import { areaList } from "@vant/area-data";
 import { Toast } from "vant";
 import { useRouter, useRoute } from "vue-router";
@@ -109,7 +109,12 @@ function onSave(data) {
     }
 }
 function onDelete() {
-    router.go(-1);
+    deleteAddress(route.query.id).then((res) => {
+        if (res.status == 204) {
+            Toast("删除成功");
+            router.go(-1);
+        }
+    });
 }
 function onChangeDetail() {}
 // *===================↑↑↑↑↑↑===================* //

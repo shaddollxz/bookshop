@@ -79,6 +79,7 @@ defineExpose({});
     &-my {
         display: flex;
         text-align: left;
+        padding: 10px 15px;
         &-img {
             flex: 1;
         }

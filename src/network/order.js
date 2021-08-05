@@ -15,7 +15,7 @@ function getOrderMsg(id) {
         url: "/api/orders/" + id,
         method: "get",
         params: {
-            include: "user,orderDetails.goods",
+            include: "orderDetails.goods,address",
         },
     });
 }
@@ -45,13 +45,14 @@ function getQRcode(id) {
     });
 }
 
-function isOrderFinish(params) {
-    /*  1 	新订单
-    2 	支付完成
-    3 	已发货
-    4 	已确认收货
-    5 	已过期 
-    */
+/**
+1 	新订单
+2 	支付完成
+3 	已发货
+4 	已确认收货
+5 	已过期 
+*/
+function getOrderState(id) {
     return request({
         url: "/api/orders/" + id + "/status",
         method: "get",
@@ -72,4 +73,4 @@ function getExpress(id) {
     });
 }
 
-export { orderPreview, createOrder };
+export { orderPreview, createOrder, getQRcode, getOrderState, getOrderList, getOrderMsg };

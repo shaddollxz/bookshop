@@ -1,3 +1,3 @@
 export default {
-    shopCarChosed: [],
+    chosedAddressID: 0,
 };
